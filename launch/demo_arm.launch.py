@@ -53,7 +53,7 @@ from launch_ros.substitutions import FindPackageShare
 def launch_setup(context, *args, **kwargs):
 
     robot_model_launch_arg = LaunchConfiguration('robot_model')
-    robot_name_launch_arg = LaunchConfiguration('robot_name')
+    robot_name_launch = LaunchConfiguration('robot_name')
     base_link_frame_launch_arg = LaunchConfiguration('base_link_frame')
     use_rviz_launch_arg = LaunchConfiguration('use_rviz')
     mode_configs_launch_arg = LaunchConfiguration('mode_configs')
@@ -68,7 +68,7 @@ def launch_setup(context, *args, **kwargs):
         name='joy_node',
         package='joy',
         executable='joy_node',
-        namespace=robot_name_launch_arg,
+        namespace=robot_name_launch,
         parameters=[{
             'dev': '/dev/input/js0',
         }],
@@ -79,9 +79,9 @@ def launch_setup(context, *args, **kwargs):
 
     xsarm_joy_node = Node(
         name='xsarm_joy',
-        package='interbotix_xsarm_joy',
+        package='liat_demo_robot',
         executable='xsarm_joy',
-        namespace=robot_name_launch_arg,
+        namespace=robot_name_launch,
         parameters=[{
             'threshold': threshold_launch_arg,
             'controller': controller_launch_arg
@@ -91,13 +91,13 @@ def launch_setup(context, *args, **kwargs):
     xsarm_robot_node = Node(
         package='interbotix_xsarm_joy',
         executable='xsarm_robot.py',
-        namespace=robot_name_launch_arg,
+        namespace=robot_name_launch,
         parameters=[{
             'robot_model': robot_model_launch_arg,
         }],
         arguments=[
             '--robot_model', robot_model_launch_arg.perform(context),
-            '--robot_name', robot_name_launch_arg.perform(context),
+            '--robot_name', robot_name_launch.perform(context),
         ],
     )
 
@@ -111,7 +111,7 @@ def launch_setup(context, *args, **kwargs):
         ]),
         launch_arguments={
             'robot_model': robot_model_launch_arg,
-            'robot_name': robot_name_launch_arg,
+            'robot_name': robot_name_launch,
             'base_link_frame': base_link_frame_launch_arg,
             'use_rviz': use_rviz_launch_arg,
             'mode_configs': mode_configs_launch_arg,
