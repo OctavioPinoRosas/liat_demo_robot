@@ -82,8 +82,8 @@ static const button_mappings ps4 = {
   {"SPEED", 7}
 };
 
-// Xbox 360 Controller button mappings
-static const button_mappings xbox360 = {
+// Xbox Controller button mappings
+static const button_mappings xbox = {
   {"WAIST_CCW", 0},  // buttons start here
   {"GRIPPER_RELEASE", 1},
   {"GRIPPER_GRASP", 2},
@@ -131,13 +131,13 @@ public:
   : rclcpp::Node("xsarm_joy", options)
   {
     this->declare_parameter("threshold", 0.75);
-    this->declare_parameter("controller", "xbox360");
+    this->declare_parameter("controller", "xbox");
 
     this->get_parameter("threshold", threshold);
     this->get_parameter("controller", controller_type);
 
-    if (controller_type == "xbox360") {
-      cntlr = xbox360;
+    if (controller_type == "xbox") {
+      cntlr = xbox;
     } else if (controller_type == "ps3") {
       cntlr = ps3;
     } else if (controller_type == "ps4") {
@@ -217,7 +217,7 @@ private:
         } else if (msg.buttons.at(cntlr["EE_Y_DEC"]) == 1) {
           joy_cmd.ee_y_cmd = interbotix_xs_msgs::msg::ArmJoy::EE_Y_DEC;
         }
-      } else if (controller_type == "xbox360") {
+      } else if (controller_type == "xbox") {
         if (msg.axes.at(cntlr["EE_Y_INC"]) <= 1.0 - 2.0 * threshold) {
           joy_cmd.ee_y_cmd = interbotix_xs_msgs::msg::ArmJoy::EE_Y_INC;
         } else if (msg.axes.at(cntlr["EE_Y_DEC"]) <= 1.0 - 2.0 * threshold) {
@@ -294,7 +294,7 @@ private:
         } else if (msg.buttons.at(cntlr["SPEED_FINE"]) == 1) {
           joy_cmd.speed_toggle_cmd = interbotix_xs_msgs::msg::ArmJoy::SPEED_FINE;
         }
-      } else if (controller_type == "ps4" || controller_type == "xbox360") {
+      } else if (controller_type == "ps4" || controller_type == "xbox") {
         // Check the speed_cmd
         if (msg.axes.at(cntlr["SPEED"]) == 1) {
           joy_cmd.speed_cmd = interbotix_xs_msgs::msg::ArmJoy::SPEED_INC;
