@@ -45,6 +45,7 @@ static const button_mappings ps3 = {
   {"EE_Y_INC", 4},
   {"EE_Y_DEC", 5},
   {"ACTIVATE_ARM", 6},
+  {"ACTIVATE_MOBIL_ROBOT", 7},
   {"SLEEP_POSE", 8},
   {"HOME_POSE", 9},
   {"TORQUE_ENABLE", 10},
@@ -69,6 +70,7 @@ static const button_mappings ps4 = {
   {"EE_Y_INC", 6},
   {"EE_Y_DEC", 7},
   {"ACTIVATE_ARM", 4},
+  {"ACTIVATE_MOBIL_ROBOT", 5},
   {"SLEEP_POSE", 8},
   {"HOME_POSE", 9},
   {"TORQUE_ENABLE", 10},
@@ -89,6 +91,7 @@ static const button_mappings xbox = {
   {"GRIPPER_GRASP", 2},
   {"WAIST_CW", 3},
   {"ACTIVATE_ARM", 4},
+  {"ACTIVATE_MOBIL_ROBOT", 5},
   {"SLEEP_POSE", 6},
   {"HOME_POSE", 7},
   {"TORQUE_ENABLE", 8},
@@ -173,7 +176,7 @@ private:
     static bool timer_started = false;
     interbotix_xs_msgs::msg::ArmJoy joy_cmd;
     // Check if button is push to move the arm
-    if (msg.buttons.at(cntlr["ACTIVATE_ARM"]) == 1){
+    if (msg.buttons.at(cntlr["ACTIVATE_ARM"]) == 1 && msg.buttons.at(cntlr["ACTIVATE_MOBIL_ROBOT"]) == 0){
       // Check if the torque_cmd should be flipped
       if (msg.buttons.at(cntlr["TORQUE_ENABLE"]) == 1 && !flip_torque_cmd_last_state) {
         flip_torque_cmd = true;
