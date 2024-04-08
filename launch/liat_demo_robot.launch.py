@@ -106,9 +106,9 @@ def launch_setup(context, *args, **kwargs):
     )
 
     xsarm_joy_node = Node(
-        name='xsarm_joy',
+        name='hunter_xsarm_joy',
         package='liat_demo_robot',
-        executable='xsarm_joy',
+        executable='hunter_xsarm_joy',
         namespace=robot_name_launch,
         parameters=[{
             'threshold': threshold_launch_arg,

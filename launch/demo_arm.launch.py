@@ -135,6 +135,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             'robot_model',
+            default_value='vx300s',
             choices=get_interbotix_xsarm_models(),
             description='model type of the Interbotix Arm such as `wx200` or `rx150`.',
         )
