@@ -4,8 +4,9 @@
   <name>liat_demo_robot</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="liat05@todo.todo">liat05</maintainer>
+  <maintainer email="octaviopinoross@gmailcom">Octavio Pino Rosas</maintainer>
   <license>TODO: License declaration</license>
+  <author email="octaviopinoross@gmail.com">Octavio Pino Rosas</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
