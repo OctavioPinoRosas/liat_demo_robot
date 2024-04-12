@@ -49,7 +49,6 @@ from launch.substitutions import (
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
-
 def launch_setup(context, *args, **kwargs):
 
     robot_model_launch_arg = LaunchConfiguration('robot_model')
@@ -128,7 +127,6 @@ def launch_setup(context, *args, **kwargs):
         xsarm_joy_node,
         xsarm_robot_node,
     ]
-
 
 def generate_launch_description():
     declared_arguments: List[DeclareLaunchArgument] = []

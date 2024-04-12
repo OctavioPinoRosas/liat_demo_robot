@@ -49,7 +49,6 @@ from launch.substitutions import (
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 
-
 def launch_setup(context, *args, **kwargs):
 
     robot_model_launch_arg = LaunchConfiguration('robot_model')
@@ -136,12 +135,12 @@ def launch_setup(context, *args, **kwargs):
         camera_node,
     ]
 
-
 def generate_launch_description():
     declared_arguments: List[DeclareLaunchArgument] = []
     declared_arguments.append(
         DeclareLaunchArgument(
             'robot_model',
+            default_value='vx300s',
             choices=get_interbotix_xsarm_models(),
             description='model type of the Interbotix Arm such as `wx200` or `rx150`.',
         )

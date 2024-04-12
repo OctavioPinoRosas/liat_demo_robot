@@ -211,7 +211,7 @@ you can see:
 To start the nodes for the robots, open a terminal window and run the first command in one window, and the second command in another window:
 - **Start the arm robot and camera installed in it:**
 ```
-ros2 launch liat_demo_robot liat_demo_arm-camera.launch.py robot_model:=vx300s
+ros2 launch liat_demo_robot liat_demo_arm-camera.launch.py
 ```
 Note: To watch the image in the rviz do click in "Add", then en "By topic" and finally select image.
 
@@ -279,7 +279,7 @@ For turbo mode push L3 betwin RB in Xbox control, and R2 button in PS4 control.
 
 | Argument | Description | Default | Choices |
 |----------|-------------|---------|---------|
-| `robot_model` | Model type of the Interbotix Arm such as wx200 or rx150. | | `px100`, `px150`, `rx150`, `rx200`, `wx200`, `wx250`, `wx250s`, `vx250`, `vx300`, `vx300s`, `mobile_px100`, `mobile_wx200`, `mobile_wx250s`|
+| `robot_model` | Model type of the Interbotix Arm such as wx200 or rx150. | `vx300s` | `px100`, `px150`, `rx150`, `rx200`, `wx200`, `wx250`, `wx250s`, `vx250`, `vx300`, `vx300s`, `mobile_px100`, `mobile_wx200`, `mobile_wx250s`|
 | `controller` | Type of controller. | `xbox` | `ps4`, `ps3`, `xbox` |
 | `use_rviz` | Launches RViz if set to true. | `true` | `true`, `false` |
 
@@ -289,6 +289,9 @@ For more customization option and information visit the [documentation](https://
 
 | Argument | Description | Default | Choices |
 |----------|-------------|---------|---------|
-| `joy_config` | Type of controller. | `xbox` | `'ps'`, `'xbox'` |
+| `joy_config` | Type of controller. | `xbox` | `ps`, `xbox` |
 
-Note: the option `ps` works with PS3 and PS4, and the option `'xbox'` funtions with Xbox360 and similar, like the control Logitech F710.
+Example:
+`ros2 launch liat_demo_robot liat_demo_hunter-teleop.launch.py joy_config:=ps`
+
+Note: the option `ps` works with PS3 and PS4, and the option `xbox` funtions with Xbox360 and similar, like the control Logitech F710.
