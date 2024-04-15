@@ -97,7 +97,7 @@ def yaml_to_dict(path_to_yaml):
 def launch_setup(context, params, param_name_suffix=''):
     _config_file = LaunchConfiguration('config_file' + param_name_suffix).perform(context)
     params_from_file = {} if _config_file == "''" else yaml_to_dict(_config_file)
-    return [
+    nodes = [
         launch_ros.actions.Node(
             package='realsense2_camera',
             namespace=LaunchConfiguration('camera_namespace' + param_name_suffix),
@@ -109,6 +109,15 @@ def launch_setup(context, params, param_name_suffix=''):
             emulate_tty=True,
             )
     ]
+
+    rqt_image_view_node = launch_ros.actions.Node(
+        name='rqt_image_view',
+        package='rqt_image_view',
+        executable='rqt_image_view',
+    )
+    nodes.append(rqt_image_view_node)
+
+    return nodes
 
 def generate_launch_description():
     return LaunchDescription(declare_configurable_parameters(configurable_parameters) + [

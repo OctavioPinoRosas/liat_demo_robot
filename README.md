@@ -15,6 +15,7 @@ If you need to change the button control, you can do so in the xarm_joy.cpp node
 - [Joy](https://github.com/ros-drivers/joystick_drivers)
 - [Teleop_twist_joy](https://github.com/ros2/teleop_twist_joy)
 - [Intel® RealSense™ SDK 2.0](https://github.com/IntelRealSense/realsense-ros.git)
+- [Rqt_image_view](https://wiki.ros.org/rqt_image_view?distro=humble)
 
 ## Installation
 If you don't have a directory, create one (the following instructions assume your workspace is at ~/ros2_ws):
@@ -59,6 +60,22 @@ Change DISTRO with your ros2 version.
 Finally, check if you have installed dependent packages teleop_twist_joy.
 
 For more information visit the [documentation](https://index.ros.org/p/teleop_twist_joy/)
+
+### Installation of [rqt-image-view](https://index.ros.org/p/rqt_image_view/#humble)
+Verify that you have installed dependent packages rqt:
+```
+ros2 pkg list | grep rqt_image_view
+```
+If you don't have it then install it:
+```
+sudo apt update
+sudo apt install ros-DISTRO-depth-image-view
+```
+Change DISTRO with your ros2 version.
+
+Finally, check if you have installed dependent packages rqt.
+
+For more information visit the [documentation](https://wiki.ros.org/rqt_image_view)
 
 ### Installation of [interbotix_ros_xsarms](https://docs.trossenrobotics.com/interbotix_xsarms_docs/ros_interface/ros2/software_setup.html)
 1. Software Installation
@@ -213,18 +230,25 @@ To start the nodes for the robots, open a terminal window and run the first comm
 ```
 ros2 launch liat_demo_robot liat_demo_arm-camera.launch.py
 ```
+If you can't see the image in the interfaze of image view, select the camera and kinde of image in the left top of interface image view.
 Note: To watch the image in the rviz do click in "Add", then en "By topic" and finally select image.
 
-If you only want initialize the arm robotic without the camera use the comand
-```
-ros2 launch liat_demo_robot demo_arm.launch.py robot_model:=vx300s
-```
 - **Start the Hunter mobile robot and teleoperation:**
 ```
 ros2 launch liat_demo_robot liat_demo_hunter-teleop.launch.py
 ```
+
+- **Other options to start the robot**
+
+| Action | command |
+|------------|---------------|
+|To start only the arm robot without th camera|`ros2 launch liat_demo_robot demo_arm.launch.py`|
+|To start onli the camera|`ros2 launch liat_demo_robot demo_arm.launch.py`|
+
 ### Buttons map
-To understand how the joystick buttons map to control the robot, look at the diagram and table below. Note that while the PS has a slightly different naming convention, the button placement is essentially the same:
+To understand how the joystick buttons map to control the robot, look at the diagrams and tables below.
+
+Note: The following driamans and tables were made using the "xbox" option with the Logitech F710 controller, although the use of PS controllers has some differences, the button placement is essentially the same
 
 - **Robotic arm button map**
 
@@ -254,7 +278,7 @@ To understand how the joystick buttons map to control the robot, look at the dia
 | LT | if the arm has 6dof, this moves the end-effector in a positive direction along its own ‘y’ axis
 | Logitech | if torqued on, holding for 3 seconds will torque off the robot; if torqued off, tapping the button will torque on the robot
 
-Note: To move the arm robotic hold down the LB button.
+Note: To move the arm robotic hold down the LB button always.
 
 - **Hunter robot button map**
 
@@ -273,6 +297,8 @@ Note: To move the arm robotic hold down the LB button.
 
 Note: To move the Hunter robot hold down the RB button.
 For turbo mode push L3 betwin RB in Xbox control, and R2 button in PS4 control.
+
+If you push the LB and RB buttons to move the Hunter and the arm robotic, only the Hunter will move.
 
 ### Customize launches files
 - To further customize the launch file at run-time for the robotic arm, look at the table below:

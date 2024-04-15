@@ -69,6 +69,12 @@ def launch_setup(context, *args, **kwargs):
         emulate_tty=True,
         )
     
+    rqt_image_view_node = Node(
+        name='rqt_image_view',
+        package='rqt_image_view',
+        executable='rqt_image_view',
+    )
+    
     joy_node = Node(
         name='joy_node',
         package='joy',
@@ -133,6 +139,7 @@ def launch_setup(context, *args, **kwargs):
         xsarm_joy_node,
         xsarm_robot_node,
         camera_node,
+        rqt_image_view_node,
     ]
 
 def generate_launch_description():
