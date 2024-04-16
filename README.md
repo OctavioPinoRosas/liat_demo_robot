@@ -233,17 +233,12 @@ ros2 launch liat_demo_robot liat_demo_arm-camera.launch.py
 If you can't see the image in the interfaze of image view, select the camera and kinde of image in the left top of interface image view.
 Note: To watch the image in the rviz do click in "Add", then en "By topic" and finally select image.
 
-- **Start the Hunter mobile robot and teleoperation:**
+If only want to use the robotic arm without the camera: `ros2 launch liat_demo_robot demo_arm.launch.py`
+
+- **Start the Hunter mobile robot:**
 ```
 ros2 launch liat_demo_robot liat_demo_hunter-teleop.launch.py
 ```
-
-- **Other options to start the robot**
-
-| Action | command |
-|------------|---------------|
-|To start only the arm robot without th camera|`ros2 launch liat_demo_robot demo_arm.launch.py`|
-|To start onli the camera|`ros2 launch liat_demo_robot demo_arm.launch.py`|
 
 ### Buttons map
 To understand how the joystick buttons map to control the robot, look at the diagrams and tables below.
