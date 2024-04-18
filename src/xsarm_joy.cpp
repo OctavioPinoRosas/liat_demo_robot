@@ -34,6 +34,10 @@
 #include "sensor_msgs/msg/joy.hpp"
 #include "interbotix_xs_msgs/msg/arm_joy.hpp"
 
+#include "cstdlib"
+static const std::string pose1_script = "/home/liat05/ros2_ws/src/liat_demo_robot/scripts/pose1.py";
+static const std::string pose2_script = "/home/liat05/ros2_ws/src/liat_demo_robot/scripts/pose2.py";
+
 typedef std::map<std::string, int> button_mappings;
 
 // PS3 Controller button mappings
@@ -81,7 +85,7 @@ static const button_mappings ps4 = {
   {"EE_ROLL", 3},
   {"EE_PITCH", 4},
   {"SPEED_TYPE", 6},
-  {"SPEED", 7}
+  {"Take", 7}
 };
 
 // Xbox Controller button mappings
@@ -103,7 +107,7 @@ static const button_mappings xbox = {
   {"EE_ROLL", 3}, // Rota el ultimo eslabon
   {"EE_PITCH", 4}, // Rota el brazo en el eje y
   {"EE_Y_DEC", 5}, // mueve extremo del brazo en el eje y-(derecha) cuando esta a cierta distacia hacia enfrente
-  {"SPEED_TYPE", 6},
+  {"Take", 6},
   {"SPEED", 7}
 };
 
@@ -281,6 +285,20 @@ private:
         joy_cmd.pose_cmd = interbotix_xs_msgs::msg::ArmJoy::HOME_POSE;
       } else if (msg.buttons.at(cntlr["SLEEP_POSE"]) == 1) {
         joy_cmd.pose_cmd = interbotix_xs_msgs::msg::ArmJoy::SLEEP_POSE;
+      } else if(msg.axes.at(cntlr["Take"]) == 1) {
+        int result = system(pose1_script.c_str());
+        if (result == 0) {
+            RCLCPP_INFO(this->get_logger(), "Script pose1.py.");
+        } else {
+            RCLCPP_ERROR(this->get_logger(), "Error script pose1.py.");
+        }
+      } else if(msg.axes.at(cntlr["Take"]) == -1) {
+        int result = system(pose2_script.c_str());
+        if (result == 0) {
+            RCLCPP_INFO(this->get_logger(), "Script pose2.py");
+        } else {
+            RCLCPP_ERROR(this->get_logger(), "Error pose2.py.");
+        }
       }
 
       if (controller_type == "ps3") {
