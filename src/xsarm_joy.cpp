@@ -35,8 +35,8 @@
 #include "interbotix_xs_msgs/msg/arm_joy.hpp"
 
 #include "cstdlib"
-static const std::string pose1_script = "/home/liat05/ros2_ws/src/liat_demo_robot/scripts/pose1.py";
-static const std::string pose2_script = "/home/liat05/ros2_ws/src/liat_demo_robot/scripts/pose2.py";
+static const std::string pose1_script = "/home/liat05/ros2_ws/src/liat_demo_robot/scripts/position.py";
+static const std::string pose2_script = "/home/liat05/ros2_ws/src/liat_demo_robot/scripts/trajectory.py";
 
 typedef std::map<std::string, int> button_mappings;
 
