@@ -230,7 +230,8 @@ To start the nodes for the robots, open a terminal window and run the first comm
 ```
 ros2 launch liat_demo_robot liat_demo_arm-camera.launch.py
 ```
-If you can't see the image in the interfaze of image view, select the camera and kinde of image in the left top of interface image view.
+If you can't see the image in the interfaze of image view, select the camera and image type in the top left corner of the image view interface.
+
 Note: To watch the image in the rviz do click in "Add", then en "By topic" and finally select image.
 
 If only want to use the robotic arm without the camera: `ros2 launch liat_demo_robot demo_arm.launch.py`
@@ -259,10 +260,10 @@ Note: The following driamans and tables were made using the "xbox" option with t
 | Y | rotate the ‘waist’ joint counterclockwise |
 | B | open gripper |
 | x | close gripper |
-| D-pad Up | increase the control loop rate in 1 Hz step increments (max of 40)
-| D-pad Down | decrease the control loop rate in 1 Hz step increments (min of 10)
-| D-pad Left | coarse’ control - sets the control loop rate to a user-preset ‘fast’ rate
-| D-pad Right | fine’ control - sets the control loop rate to a user-preset ‘slow’ rate
+| D-pad Up | increase the control loop rate in 1 Hz step increments (max of 40) |
+| D-pad Down | decrease the control loop rate in 1 Hz step increments (min of 10) |
+| D-pad Left | go to position x=0.3, z=-0.2,pitch=1.5|
+| D-pad Right | do the trayectory: open gripper; x=0.3, z=-0.26,pitch=1.5; close gripper; and x=0.55, z=0.4 |
 | Right stick Up/Down | increase/decrease the pitch of the end-effector
 | Right stick Left/Right | increase/decrease roll of the end-effector
 | R3 | reverses the Right stick Left/Right control
@@ -273,7 +274,13 @@ Note: The following driamans and tables were made using the "xbox" option with t
 | LT | if the arm has 6dof, this moves the end-effector in a positive direction along its own ‘y’ axis
 | Logitech | if torqued on, holding for 3 seconds will torque off the robot; if torqued off, tapping the button will torque on the robot
 
-Note: To move the arm robotic hold down the LB button always.
+**Note:**
+
+To move the arm robotic hold down the LB button always.
+
+If when you move the joysticks the robotic arm't move, push back (Sleep) first.
+
+After to push the button D-pad Left/ D-pad right to move the arm to a established position or trajectory, push Star (Home) or Back(Sleep) to unlock the arm and move normaly. To configure correctly the buttons check the section "Customize launches files and other settings".
 
 - **Hunter robot button map**
 
@@ -295,7 +302,13 @@ For turbo mode push L3 betwin RB in Xbox control, and R2 button in PS4 control.
 
 If you push the LB and RB buttons to move the Hunter and the arm robotic, only the Hunter will move.
 
-### Customize launches files
+### Customize launches files and other settings
+
+To customize launches files when you use the robots follow instructions below. 
+Theres some intruction to modify the end position and trajectory estrablised.
+
+#### Arm robot
+
 - To further customize the launch file at run-time for the robotic arm, look at the table below:
 
 | Argument | Description | Default | Choices |
@@ -305,6 +318,25 @@ If you push the LB and RB buttons to move the Hunter and the arm robotic, only t
 | `use_rviz` | Launches RViz if set to true. | `true` | `true`, `false` |
 
 For more customization option and information visit the [documentation](https://docs.trossenrobotics.com/interbotix_xsarms_docs/ros2_packages/joystick_control.html)
+
+- Modification to can use the buttons to position and trajectory established
+
+To should use the buttons to move the arm to the position and trajectory established you need to change the path where files when describe that.
+In the file "src/xsarm_joy.cpp" change `/home/liat05/ros2_ws` with the path where is you workspace. The part of code to modify is:
+```
+static const std::string pose1_script = "/home/liat05/ros2_ws/src/liat_demo_robot/scripts/position.py";
+static const std::string pose2_script = "/home/liat05/ros2_ws/src/liat_demo_robot/scripts/trajectory.py";
+```
+
+- Modify the move position established
+
+To modify the position established go to the file "Scripts/position.py"
+
+- Modify the trajectory established
+
+To modify the trajectory established go to the file "Scripts/trajectory.py"
+
+#### Hunter robot
 
 - To configure the control in the Hunter robot launch file
 

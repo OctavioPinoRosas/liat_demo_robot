@@ -51,6 +51,8 @@ def main():
     )
     bot.gripper.release()
     bot.arm.set_ee_pose_components(x=0.3, z=-0.2,pitch=1.5,moving_time=2.3)
+    bot.gripper.grasp()
+    bot.shutdown()
 
 if __name__ == '__main__':
     main()

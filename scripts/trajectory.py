@@ -52,6 +52,7 @@ def main():
     bot.gripper.release()
     bot.arm.set_ee_pose_components(x=0.3, z=-0.26,pitch=1.5,moving_time=2.3)
     bot.gripper.grasp()
+    bot.gripper.grasp()
     bot.arm.set_ee_pose_components(x=0.55, z=0.4,moving_time=2.3)
     bot.shutdown()
 
